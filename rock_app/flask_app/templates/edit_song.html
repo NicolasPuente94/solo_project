@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body class="bg-secondary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <h1 class="col-9 text-info">Update Your Song!!!</h1>
+            <a class="navbar-brand btn btn-primary" href="/dashboard">Dashboard</a>
+            <a class="navbar-brand btn btn-info" href="/logout">Logout</a>
+        </div>
+    </nav><br>
+    <div class="d-flex justify-content-around">
+        <form action="/update_song/{{ one_song.id }}" method="POST" class="col-4 p-4 bg-dark text-light">
+            <h1 class="text-danger">Update {{ one_song.band }}</h1>
+            {% with messages = get_flashed_messages(category_filter=['song']) %}
+                {% if messages %}
+                    <div class="alert alert-danger" role="alert">
+                        <strong>Flash AHHHHHHH!!!!</strong>
+                            {% for message in messages %}
+                                <p>{{message}}</p>
+                            {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            <div class="form-group">
+                <label for="band">Band:</label>
+                <input type="text" name="band" value="{{one_song.band}}" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="released_on">Released on:</label>
+                <input type="date" name="released_on" value="{{one_song.released_on}}" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="album">Album:</label>
+                <input type="text" name="album" value="{{one_song.album}}" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="genre">Genre:</label>
+                <input type="text" name="genre" value="{{one_song.genre}}" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="song">Song:</label>
+                <input type="text" name="song" value="{{one_song.song}}" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="lyrics">Lyrics:</label>
+                <textarea type="text" name="lyrics" value="{{one_song.lyrics}}" class="form-control" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="video">Video:</label>
+                <input type="url" name="video" value="{{one_song.video}}">
+            </div>
+            <input type="submit" value="Update Song" class="form-control btn-danger">
+        </form>
+    </div>
+</body>
+</html>

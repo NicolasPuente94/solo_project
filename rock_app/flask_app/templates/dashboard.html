@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body class="bg-secondary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <h1 class="col-9 text-info">Welcome Back, {{users.first_name}}!!!</h1>
+            <a class="navbar-brand btn btn-info" href="/logout">Logout</a>
+        </div>
+    </nav><br>
+    <div class="p-3">
+        <h1>Songs</h1>
+    </div>
+        <table class="table table-striped table-hover table-light table-bordered">
+            <thead class="table-dark text-info">
+                <th>Band</th>
+                <th>Released_on</th>
+                <th>Album</th>
+                <th>Genre</th>
+                <th>Song</th>
+                <th>Rocker</th>
+                <th>Actions</th>
+            </thead>
+            {% for one_song in songs %}
+                <tbody class="table-striped ">
+                    <td>{{ one_song.band }}</td>
+                    <td>{{ one_song.released_on }}</td>
+                    <td>{{ one_song.album }}</td>
+                    <td>{{ one_song.genre }}</td>
+                    <td>{{ one_song.song }}</td>
+                    <td>
+                        <a href="/one_user/{{ one_song.the_user.id }}">
+                            {{ one_song.the_user.first_name }} {{ one_song.the_user.last_name }}</td>
+                        </a>
+                    <td>
+                    <a href="/one_song/{{ one_song.id }}">View</a> |
+                        {% if one_song.the_user.id == session.user_id %}
+                        <a href="/edit/{{one_song.id}}">Edit Song</a> | 
+                        <a href="/destroy_song/{{one_song.id}}">Delete</a>
+                        {% endif %}
+                    </td>
+                </tbody>
+            {% endfor %}
+        </table>
+            <a class="btn btn-primary" href="/new">Add a Song</a>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body class="bg-secondary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <h1 class="col-9 text-info">Add Your Song! {{user.first_name}}!!!</h1>
+            <a class="navbar-brand btn btn-primary" href="/dashboard">Dashboard</a>
+            <a class="navbar-brand btn btn-info" href="/logout">Logout</a>
+        </div>
+    </nav>
+    <div class="d-flex justify-content-around mt-4">
+        <form action="/create_song" method="POST" class="col-4 p-4 bg-dark text-light">
+            {% with messages = get_flashed_messages(category_filter=['song']) %}
+                {% if messages %}
+                    <div class="alert alert-danger" role="alert">
+                        <strong>Flash WOW!!!!</strong>
+                            {% for message in messages %}
+                                <p>{{message}}</p>
+                            {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            <div class="form-group">
+                <label for="band">Band:</label>
+                <input type="text" name="band" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="released_on">Released_on:</label>
+                <input type="date" name="released_on" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="album">Album:</label>
+                <input type="text" name="album" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="genre">Genre:</label>
+                <input type="text" name="genre" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="song">Song:</label>
+                <input name="song" class="form-control" cols="30" rows="5">
+            </div>
+            <div class="form-group">
+                <label for="lyrics">Lyrics:</label>
+                <textarea type="text" name="lyrics" class="form-control" cols="30" rows="5"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="video">Video:</label>
+                <input type="url" name="video" class="form-control">
+            </div>
+            <input type="submit" value="New Song" class="form-control btn btn-primary">
+        </form>
+    </div>
+</body>
+</html>

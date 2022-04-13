@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Single Song</title>
+</head>
+<body class="bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+        <div class="container-fluid">
+            <h1 class="col-4 text-danger">{{one_song.song}}!!!</h1>
+            <h1 class="col-3 text-info"><b>Rock App</b></h1>
+            <a class="navbar-brand btn btn-primary" href="/dashboard">Dashboard</a>
+            <a class="navbar-brand btn btn-info" href="/logout">Logout</a>
+        </div>
+    </nav>
+    <!-- main container -->
+    <div class="container d-flex justify-content-around">
+            <!-- left container -->
+            <div class="col-6 mt-4">
+                <div class="bg-secondary text-light">
+                    <h1><b class="text-dark ml-5 ">Lyrics:</b></h1>
+                    <div class="card col-10 mx-auto my-5 bg-secondary text-light">
+                        <p><b class="text-dark">{{ one_song.lyrics }}</p>
+                    </div>
+                </div>
+            </div>
+            <!-- right container -->
+            <div class="col-12 mt-4">
+                <div class="bg-secondary text-light">
+                    <h1 class="text-dark ml-5"><strong class="text-danger">{{ one_song.band }}</strong> - {{ one_song.album }} - {{ one_song.released_on }}</h1>
+                    <!-- image -->
+                    <div>
+                        <img src="{{ one_song.image }}" alt="{{ one_song.image }}">
+                    </div>
+                    <div>
+                        <iframe width="560" height="315" src="{{ one_song.video|replace('watch?v=', '/embed/')| replace('&ab_channel=LinkinPark', '')}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <!-- buttons -->
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        {% if one_song.the_user.id == session.user_id %}
+                        <a href="/destroy_song/{{ one_song.id }}" class="btn btn-primary me-md-2"><b>Delete Song</b></a>
+                        <a href="/edit/{{ one_song.id }}" class="btn btn-danger"><b>Update Song</b> </a></td>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+    </div>
+</body>
+</html>
